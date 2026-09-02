@@ -1,3 +1,4 @@
+//When the problem requires us to return the modified vector
 class Solution1 {
   public:
     vector<int> removeDuplicates(vector<int> &arr) {
@@ -33,5 +34,38 @@ class Solution2 {
         }
         arr.resize(i+1);
         return arr;
+    }
+};
+
+
+//When we are required to return the number of unique elements
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        set<int> st;
+        for(int i=0; i<nums.size(); i++){
+            st.insert(nums[i]);
+        }
+        int index=0;
+        for(auto it : st){
+            nums[index]=it;
+            index++;
+        }
+        return index;
+    }
+};
+
+class Solution2 {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n=nums.size();
+        int firstPointer=0;
+        for(int secondPointer=0; secondPointer<n; secondPointer++){
+            if(nums[secondPointer]!=nums[firstPointer]){
+                nums[firstPointer+1]=nums[secondPointer];
+                firstPointer++;
+            }
+        }
+        return firstPointer+1;
     }
 };
